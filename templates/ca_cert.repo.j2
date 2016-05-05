@@ -1,0 +1,8 @@
+[{{item.name}}]
+name={{item.name}}
+baseurl={{item.baseurl}}
+{% if item.gpgkey is defined and item.gpgkey != none %}
+gpgkey={{item.gpgkey}}
+gpgcheck=1
+{% endif %}
+enabled=0

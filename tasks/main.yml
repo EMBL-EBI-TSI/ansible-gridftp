@@ -1,0 +1,10 @@
+---
+- name: Install repo package
+  yum: name={{gridftp_repo_rpm_url}} state=present
+
+- include: server.yml
+  when: gridftp_mode == 'server'
+
+- include: client.yml
+  when: gridftp_mode == 'client'
+

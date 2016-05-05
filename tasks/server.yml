@@ -1,0 +1,20 @@
+---
+- name: Install packages
+  yum: name={{item}} state=present
+  with_items:
+    - globus-gridftp
+    - globus-gsi
+    - globus-data-management-server
+
+- name: Configure server
+  template: dest=/etc/gridftp.conf src=gridftp.conf.j2 mode=0644
+  notify: Restart gridftp
+
+- include: ca_cert_repos.yml
+  with_items: '{{gridftp_ca_cert_repos}}'
+
+- include: ca_local_certs.yml
+  with_items: '{{gridftp_ca_local_certs}}'
+
+- name: Enable service
+  service: name=globus-gridftp-server state=started enabled=yes

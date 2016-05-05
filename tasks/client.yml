@@ -1,0 +1,8 @@
+- name: Install packages
+  yum: name={{item}} state=present
+  with_items:
+    - globus-gsi
+    - globus-data-management-client
+
+- name: Set environment variable for port rage
+  lineinfile: dest=/etc/environment regexp='GLOBUS_TCP_PORT_RANGE' line='GLOBUS_TCP_PORT_RANGE={{gridftp_tcp_port_range | replace("-", ",")}}'
