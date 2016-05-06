@@ -6,3 +6,6 @@
 
 - name: Set environment variable for port rage
   lineinfile: dest=/etc/environment regexp='GLOBUS_TCP_PORT_RANGE' line='GLOBUS_TCP_PORT_RANGE={{gridftp_tcp_port_range | replace("-", ",")}}'
+
+- include: ca_cert_repos.yml
+  with_items: '{{gridftp_ca_cert_repos}}'

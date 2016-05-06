@@ -9,16 +9,17 @@ By default no anonymous users are allowed, set `gridftp_allow_anonymous: no` and
 In order to make GridFTP usable you will need to deploy several certificates in both server and client.
 
 For the server you will need:
-- Other CA certificates you trust.
 - CA certificates used to create the host certificate (needed?),
 - CA certificates used to create the user certificates presented by the clients.
+- Other CA certificates you trust.
 - Valid host certificate (and private key).
 
 For the client you will need:
 - CA certificates used to create the server's host certificate.
+- Other CA certificates you trust.
 - User certificates.
 
-CA certificates can be deployed in two ways, using certificate repositories from known CA sources or installing locally trusted CA certificates.
+CA certificates can be deployed in two ways, using certificate repositories from known CA sources (on servers and clients) or installing locally trusted CA certificates (only on servers).
 
 You probably want to install packages repositories from known CA sources, ie IGTF, EUGridPMA, APGridPMA or TAGPMA. Each repository should be listed in `gridftp_ca_cert_repos` along with a list of packages to install. For example:
 ```
