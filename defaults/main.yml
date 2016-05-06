@@ -32,3 +32,5 @@ gridftp_ca_local_certs: []
   #   subject: '/O=Grid/OU=GlobusTest/CN=Globus Simple CA'
   #   policy: '/O=Grid/OU=GlobusTest/*'
   #   cert:
+gridftp_host_cert:
+gridftp_host_key:

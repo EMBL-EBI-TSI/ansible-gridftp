@@ -43,7 +43,7 @@ gridftp_ca_local_certs:
       -----END CERTIFICATE-----
 ```
 
-You should ask your local CA representative for host (for server) and user (for client) certificates.
+You should ask your local CA representative for host (for server) and user (for client) certificates. Once you have a valid host (trusted by your CA) and its accompanying private key install with variables `gridftp_host_cert` and `gridftp_host_key` (possible holding the host key in the vault).
 
 Requirements
 ------------
