@@ -34,3 +34,8 @@ gridftp_ca_local_certs: []
   #   cert:
 gridftp_host_cert:
 gridftp_host_key:
+
+# Mappings
+gridftp_mappings: []
+  # - ln: vagrant
+  #   dn: '/O=Grid/OU=GlobusTest/CN=vagrant'

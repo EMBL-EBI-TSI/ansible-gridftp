@@ -45,6 +45,13 @@ gridftp_ca_local_certs:
 
 You should ask your local CA representative for host (for server) and user (for client) certificates. Once you have a valid host (trusted by your CA) and its accompanying private key install with variables `gridftp_host_cert` and `gridftp_host_key` (possible holding the host key in the vault).
 
+This role manages globus' `grid-mapfile` directly without the use of grid-mapfile- tools. Only mappings defined in `gridftp_mapping` will get globus authorization. For example:
+```
+gridftp_mappings:
+  - ln: vagrant
+    dn: '/O=Grid/OU=GlobusTest/CN=vagrant'
+```
+
 Requirements
 ------------
 See `meta/main.yml`.
@@ -85,6 +92,7 @@ TODO
 - Create host cert/key from custom CA
 - Cron job for revocation list
 - Firewall
+- Manage grid-mapfile with grid-mapfile-add-entry and grid-mapfile-delete-entry tools
 
 Licence
 -------
