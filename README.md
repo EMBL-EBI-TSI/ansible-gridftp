@@ -12,11 +12,11 @@ For the server you will need:
 - Other CA certificates you trust.
 - CA certificates used to create the host certificate (needed?),
 - CA certificates used to create the user certificates presented by the clients.
-- Valid host certificate.
+- Valid host certificate (and private key).
 
 For the client you will need:
 - CA certificates used to create the server's host certificate.
-- User certificates
+- User certificates.
 
 CA certificates can be deployed in two ways, using certificate repositories from known CA sources or installing locally trusted CA certificates.
 
@@ -63,21 +63,27 @@ Example:
 - hosts: gridftp-servers
   roles:
   - gridftp
+
+- hosts: gridftp-clients
+  roles:
+  - gridftp
 ```
 
 TODO
 ----
-- threading on clients.
-- xinetd conf or gfork.
-- set gridftp_instances in xinetd/gfork conf or command line.
-- tune host: http://fasterdata.es.net/host-tuning/
-- use udt instead of tcp?
-- strped and cluster-to-cluster setup.
+- Threading on clients
+- xinetd conf or gfork
+- Set gridftp_instances in xinetd/gfork conf or command line
+- Tune host: http://fasterdata.es.net/host-tuning/
+- Use udt instead of tcp?
+- strped and cluster-to-cluster setup
 - chroot
-- enable confidential communication (encryption)?
-- get all certs in igtf or terana?
-- make elixir CA the default
-- create host cert/key from elixir CA
+- Enable confidential communication (encryption)?
+- Get all certs in igtf or terana?
+- Make elixir CA the default
+- Create host cert/key from custom CA
+- Cron job for revocation list
+- Firewall
 
 Licence
 -------
