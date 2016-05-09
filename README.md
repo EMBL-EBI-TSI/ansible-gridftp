@@ -19,7 +19,7 @@ For the client you will need:
 - Other CA certificates you trust.
 - User certificates.
 
-CA certificates can be deployed in two ways, using certificate repositories from known CA sources (on servers and clients) or installing locally trusted CA certificates (only on servers).
+CA certificates can be deployed in two ways to both servers and clients, using certificate repositories from known CA sources or installing locally trusted CA certificates.
 
 You probably want to install packages repositories from known CA sources, ie IGTF, EUGridPMA, APGridPMA or TAGPMA. Each repository should be listed in `gridftp_ca_cert_repos` along with a list of packages to install. For example:
 ```

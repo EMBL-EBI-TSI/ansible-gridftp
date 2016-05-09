@@ -6,16 +6,12 @@
 
 - name: Drop CA {{item.name}} certificate
   copy: dest=/etc/grid-security/certificates/{{item.name}}.pem content='{{item.cert}}' mode=0644
-  notify: Restart gridftp
 
 - name: Generate {{item.name}} signing policy
   template: dest=/etc/grid-security/certificates/{{item.name}}.signing_policy src=ca_cert.signing_policy.j2 mode=0644
-  notify: Restart gridftp
 
 - name: Set link to {{item.name}} CA certificate
   file: path=/etc/grid-security/certificates/{{hash.stdout}}.0 src={{item.name}}.pem state=link
-  notify: Restart gridftp
 
 - name: Set link to {{item.name}} signing policy
   file: path=/etc/grid-security/certificates/{{hash.stdout}}.signing_policy src={{item.name}}.signing_policy state=link
-  notify: Restart gridftp
