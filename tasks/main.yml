@@ -2,6 +2,12 @@
 - name: Install repo package
   yum: name={{gridftp_repo_rpm_url}} state=present
 
+- name: check if firewalld is active
+  command: service firewalld status
+  register: firewalld_st
+  ignore_errors: true
+  changed_when: false
+
 - include: server.yml
   when: gridftp_mode == 'server'
 
