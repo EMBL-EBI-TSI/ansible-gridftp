@@ -1,5 +1,5 @@
 - name: Install packages
-  yum: name={{item}} state=present
+  yum: name={{item}} state=latest
   with_items:
     - globus-gsi
     - globus-data-management-client

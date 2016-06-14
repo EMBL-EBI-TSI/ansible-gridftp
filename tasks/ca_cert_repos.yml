@@ -3,4 +3,4 @@
   template: dest=/etc/yum.repos.d/{{item.name}}.repo src=ca_cert.repo.j2
 
 - name: Install {{item.name}} CA certificates
-  yum: name={{item.packages}} state=present enablerepo={{item.name}}
+  yum: name={{item.packages}} state=latest enablerepo={{item.name}}
