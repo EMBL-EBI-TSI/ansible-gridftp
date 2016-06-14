@@ -18,12 +18,6 @@
     - '{{gridftp_tcp_port_range}}/tcp'
   when: firewalld_st.rc == 0
 
-- include: ca_cert_repos.yml
-  with_items: '{{gridftp_ca_cert_repos}}'
-
-- include: ca_local_certs.yml
-  with_items: '{{gridftp_ca_local_certs}}'
-
 - name: Install host certificate
   copy: content='{{gridftp_host_cert}}' dest=/etc/grid-security/hostcert.pem owner=root group=root mode=0644
   when: gridftp_host_cert | default()

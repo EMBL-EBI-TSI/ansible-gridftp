@@ -12,9 +12,3 @@
   with_items:
     - '{{gridftp_tcp_port_range}}/tcp'
   when: firewalld_st.rc == 0
-
-- include: ca_cert_repos.yml
-  with_items: '{{gridftp_ca_cert_repos}}'
-
-- include: ca_local_certs.yml
-  with_items: '{{gridftp_ca_local_certs}}'
