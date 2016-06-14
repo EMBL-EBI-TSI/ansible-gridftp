@@ -21,27 +21,34 @@ For the client you will need:
 
 CA certificates can be deployed in two ways to both servers and clients, using certificate repositories from known CA sources or installing locally trusted CA certificates.
 
-You probably want to install packages repositories from known CA sources, ie IGTF, EUGridPMA, APGridPMA or TAGPMA. Each repository should be listed in `gridftp_ca_cert_repos` along with a list of packages to install. For example:
+You probably want to install packages repositories from known CA sources, ie EGI, IGTF, EUGridPMA, APGridPMA or TAGPMA. Each repository should be listed in `gridftp_ca_cert_repos` along with a list of packages to install. For example:
 ```
 gridftp_ca_cert_repos:
-  - name: eugridpma
-    baseurl: http://dist.eugridpma.info/distribution/igtf/current/
-    gpgkey: https://dist.eugridpma.info/distribution/igtf/current/GPG-KEY-EUGridPMA-RPM-3
+  - name: EGI-trustanchors
+    baseurl: http://repository.egi.eu/sw/production/cas/1/current/
+    gpgkey: http://repository.egi.eu/sw/production/cas/1/GPG-KEY-EUGridPMA-RPM-3
     packages:
-      - ca_policy_igtf-classic
+      - ca-policy-egi-core
 ```
 
 Local trusted CA certificates can also be installing by listing them in `gridftp_ca_local_certs` along with their subject and signing policy. For example:
 ```
 gridftp_ca_local_certs:
-  - name:
+  - name: my_certificate
     subject: '/O=Grid/OU=GlobusTest/CN=Globus Simple CA'
     policy: '/O=Grid/OU=GlobusTest/*'
+    cert_file: path/to/certificate
+```
+
+Alternatively you can also specify the certificate's content instead of pointing to a file:
+
+```
     cert: |
       -----BEGIN CERTIFICATE-----
       ...
       -----END CERTIFICATE-----
 ```
+If both `cert_file` and `cert` are specified, `cert_file` will take overwrite `cert`. Leaving both options undefined will try to just change the signing policy using an already existant certificate with the filename equal to the name specified.
 
 You should ask your local CA representative for host (for server) and user (for client) certificates. Once you have a valid host (trusted by your CA) and its accompanying private key install with variables `gridftp_host_cert` and `gridftp_host_key` (possible holding the host key in the vault).
 
