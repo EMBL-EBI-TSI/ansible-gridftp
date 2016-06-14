@@ -1,14 +1,15 @@
 ---
-- name: Calculate hash for CA certificate {{item.name}}
-  shell: echo '{{item.cert}}' | openssl x509 -hash -noout
-  register: hash
-  changed_when: false
-
 - name: Drop CA {{item.name}} certificate
   copy: dest=/etc/grid-security/certificates/{{item.name}}.pem content='{{item.cert}}' mode=0644
+  when: item.cert is defined
 
 - name: Generate {{item.name}} signing policy
   template: dest=/etc/grid-security/certificates/{{item.name}}.signing_policy src=ca_cert.signing_policy.j2 mode=0644
+
+- name: Calculate hash for CA certificate {{item.name}}
+  shell: openssl x509 -hash -noout -in /etc/grid-security/certificates/{{item.name}}.pem
+  register: hash
+  changed_when: false
 
 - name: Set link to {{item.name}} CA certificate
   file: path=/etc/grid-security/certificates/{{hash.stdout}}.0 src={{item.name}}.pem state=link
