@@ -50,3 +50,6 @@ gridftp_restrict_homedirs: yes
 
 # UberFTP
 gridftp_uberftp: yes
+
+# Fetch-crl
+gridftp_fetchcrl: yes

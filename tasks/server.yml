@@ -37,3 +37,6 @@
 
 - name: Update grid-mapfile
   template: dest=/etc/grid-security/grid-mapfile src=grid-mapfile.j2 owner=root group=root mode=0644
+
+- include: fetchcrl.yml
+  when: gridftp_fetchcrl
