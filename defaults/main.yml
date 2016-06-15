@@ -44,5 +44,9 @@ gridftp_mappings: []
   # - ln: vagrant
   #   dn: '/O=Grid/OU=GlobusTest/CN=vagrant'
 
+# Directory restrictions
+gridftp_restrict_directories: []
+gridftp_restrict_homedirs: yes
+
 # UberFTP
 gridftp_uberftp: yes

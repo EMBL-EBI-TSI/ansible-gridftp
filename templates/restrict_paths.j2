@@ -1,0 +1,6 @@
+{% if gridftp_restrict_directories != [] %}
+restrict_paths {{gridftp_restrict_directories | join(',')}}
+{% endif %}
+{% if gridftp_restrict_homedirs %}
+use_home_dirs 1
+{% endif %}

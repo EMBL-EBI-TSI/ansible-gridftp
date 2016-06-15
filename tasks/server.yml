@@ -26,6 +26,12 @@
   copy: content='{{gridftp_host_key}}' dest=/etc/grid-security/hostkey.pem owner=root group=root mode=0400
   when: gridftp_host_key | default()
 
+- name: Create /etc/gridftp.d
+  file: path=/etc/gridftp.d state=directory owner=root group=root mode=0755
+
+- name: Limit directory access
+  template: dest=/etc/gridftp.d/restrict_paths src=restrict_paths.j2 owner=root group=root mode=0644
+
 - name: Enable service
   service: name=globus-gridftp-server state=started enabled=yes
 
