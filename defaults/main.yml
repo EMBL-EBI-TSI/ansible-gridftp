@@ -43,3 +43,6 @@ gridftp_host_key:
 gridftp_mappings: []
   # - ln: vagrant
   #   dn: '/O=Grid/OU=GlobusTest/CN=vagrant'
+
+# UberFTP
+gridftp_uberftp: yes

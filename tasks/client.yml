@@ -12,3 +12,6 @@
   with_items:
     - '{{gridftp_tcp_port_range}}/tcp'
   when: firewalld_st.rc == 0
+
+- include: uberftp.yml
+  when: gridftp_uberftp
