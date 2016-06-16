@@ -1,25 +1,37 @@
 GridFTP
 =======
-Install GridFTP servers and clients.
+Install GridFTP servers and clients. The role will:
+- Install globus software and dependencies as needed
+- Configure gridftp servers
+- Main config in /etc/gridftp.conf
+- Directory access restrictions in /etc/gridftp.d
+- Host cert/key in /etc/grid-security
+- CA certificates in /etc/grid-security/certificates
+- Complete management of mappings in /etc/grid-security/grid-mapfile
+- Start the service and enable it at boot
+- Open firewall ports if firewalld is detected
+- Install fetch-crl and cronjobs on servers to maintain revocation lists
+- Install UberFTP of clients
 
 Choose the mode to work by setting `gridftp_mode` to `server` (default) or `client`.
 
-By default no anonymous users are allowed, set `gridftp_allow_anonymous: no` and change the `gridftp_anonymous_user` of your choice (defaults to `nogody`).
+By default no anonymous users are allowed, set `gridftp_allow_anonymous: no` and change the `gridftp_anonymous_user` of your choice (defaults to `nobody`).
 
 In order to make GridFTP usable you will need to deploy several certificates in both server and client.
 
 For the server you will need:
-- CA certificates used to create the host certificate (needed?),
+- CA certificates used to create the host certificate,
 - CA certificates used to create the user certificates presented by the clients.
 - Other CA certificates you trust.
-- Valid host certificate (and private key).
+- Valid host certificate and private key.
 
 For the client you will need:
 - CA certificates used to create the server's host certificate.
+- CA certificates used to create the user certificate.
 - Other CA certificates you trust.
 - User certificates.
 
-CA certificates can be deployed in two ways to both servers and clients, using certificate repositories from known CA sources or installing locally trusted CA certificates.
+CA certificates can be deployed in two ways to both servers and clients: using certificate repositories from known CA sources or installing locally trusted CA certificates.
 
 You probably want to install packages repositories from known CA sources, ie EGI, IGTF, EUGridPMA, APGridPMA or TAGPMA. Each repository should be listed in `gridftp_ca_cert_repos` along with a list of packages to install. For example:
 ```
@@ -58,6 +70,8 @@ gridftp_mappings:
   - ln: vagrant
     dn: '/O=Grid/OU=GlobusTest/CN=vagrant'
 ```
+
+Installation of fetch-crl (on the server) and UberFTP (on the client) are managed by `gridftp_fetchcrl` and `gridftp_uberftp`.
 
 Requirements
 ------------
