@@ -7,7 +7,7 @@
     - globus-data-management-server
 
 - name: Configure server
-  template: dest=/etc/gridftp.conf src=gridftp.conf.j2 mode=0644
+  template: dest=/etc/gridftp.conf src=gridftp.conf.j2 owner=root group=root mode=0644
   notify: Restart gridftp
 
 - name: Open firewall
@@ -36,7 +36,7 @@
   service: name=globus-gridftp-server state=started enabled=yes
 
 - name: Update grid-mapfile
-  template: dest=/etc/grid-security/grid-mapfile src=grid-mapfile.j2 owner=root group=root mode=0644
+  template: dest=/etc/grid-security/grid-mapfile src=grid-mapfile.j2 owner=root group=root mode=0644 backup=yes
 
 - include: fetchcrl.yml
   when: gridftp_fetchcrl
