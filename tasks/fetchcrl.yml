@@ -1,6 +1,6 @@
 ---
 - name: Add fetch-crl repository
-  template: dest=/etc/yum.repos.d/fetch-crl.repo src=fetch-crl.repo.j2
+  yum_repository: name=fetch-crl enabled=no description='fetch-crl' baseurl=https://dist.eugridpma.info/distribution/util/fetch-crl owner=root group=root mode=0644
 
 - name: Install fetch-crl
   yum: name=fetch-crl state=latest enablerepo=fetch-crl
