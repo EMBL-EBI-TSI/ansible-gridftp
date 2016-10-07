@@ -18,7 +18,7 @@
   copy: content='{{gridftp_host_cert}}' dest=/etc/grid-security/hostcert.pem owner=root group=root mode=0644
   when: gridftp_host_cert | default()
 
-- name: Install host certificate
+- name: Install host key
   copy: content='{{gridftp_host_key}}' dest=/etc/grid-security/hostkey.pem owner=root group=root mode=0400
   when: gridftp_host_key | default()
 
