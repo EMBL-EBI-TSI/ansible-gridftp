@@ -29,7 +29,7 @@
 - name: Create /etc/gridftp.d
   file: path=/etc/gridftp.d state=directory owner=root group=root mode=0755
 
-- name: Create gridftp data paths
+- name: Create gridftp restrict directories
   file: path={{item}} owner=root group=root mode=0755 state=directory
   with_items: '{{gridftp_restrict_directories}}'
 
