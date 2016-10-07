@@ -6,10 +6,6 @@
     - globus-gsi
     - globus-data-management-server
 
-- name: Configure server
-  template: dest=/etc/gridftp.conf src=gridftp.conf.j2 owner=root group=root mode=0644
-  notify: Restart gridftp
-
 - name: Open firewall
   firewalld: port={{item}} permanent=true state=enabled
   with_items:
@@ -26,11 +22,16 @@
   copy: content='{{gridftp_host_key}}' dest=/etc/grid-security/hostkey.pem owner=root group=root mode=0400
   when: gridftp_host_key | default()
 
+- name: Configure server
+  template: dest=/etc/gridftp.conf src=gridftp.conf.j2 owner=root group=root mode=0644
+  notify: Restart gridftp
+
 - name: Create /etc/gridftp.d
   file: path=/etc/gridftp.d state=directory owner=root group=root mode=0755
 
-- name: Limit directory access
-  template: dest=/etc/gridftp.d/restrict_paths src=restrict_paths.j2 owner=root group=root mode=0644
+- name: Create gridftp data paths
+  file: path={{item}} owner=root group=root mode=0755 state=directory
+  with_items: '{{gridftp_restrict_directories}}'
 
 - name: Enable service
   service: name=globus-gridftp-server state=started enabled=yes

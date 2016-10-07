@@ -7,17 +7,25 @@
 # Modes of operation
 threads {{gridftp_threads}}
 
-# Authentication, authorization and security options
+# Authentication, authorization and security
 allow_anonymous {{gridftp_allow_anonymous | bool | int}}
 anonymous_user {{gridftp_anonymous_user}}
 
-# Logging options
+# Logging
 log_module {{gridftp_log_module}}
 log_level {{gridftp_log_level}}
 log_single {{gridftp_log_file}}
 log_filemode {{gridftp_log_filemode}}
 disable_usage_stats {{gridftp_disable_usage_stats | bool | int}}
 
-# Network options
+# Network
 port {{gridftp_port}}
 port_range {{gridftp_tcp_port_range | replace("-", ",")}}
+
+# Restrict paths
+{% if gridftp_restrict_directories != [] %}
+restrict_paths {{gridftp_restrict_directories | join(',')}}
+{% endif %}
+{% if gridftp_restrict_homedirs %}
+use_home_dirs 1
+{% endif %}
