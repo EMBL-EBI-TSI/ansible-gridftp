@@ -114,6 +114,7 @@ TODO
 - Cron job for revocation list
 - Firewall
 - Manage grid-mapfile with grid-mapfile-add-entry and grid-mapfile-delete-entry tools
+- Document default variables
 
 Licence
 -------
