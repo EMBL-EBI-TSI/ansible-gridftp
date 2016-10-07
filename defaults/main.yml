@@ -21,6 +21,9 @@ gridftp_disable_usage_stats: yes
 gridftp_port: 2811
 gridftp_tcp_port_range: 50000-51000
 
+# Other options
+gridftp_options: {}
+
 # Certificates
 gridftp_ca_cert_repos: []
   # - name:

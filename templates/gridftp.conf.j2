@@ -29,3 +29,9 @@ restrict_paths {{gridftp_restrict_directories | join(',')}}
 {% if gridftp_restrict_homedirs %}
 use_home_dirs 1
 {% endif %}
+
+# Other options
+# Will override previous definitions
+{% for key, value in gridftp_options.iteritems() %}
+{{key}} {{value}}
+{% endfor %}
