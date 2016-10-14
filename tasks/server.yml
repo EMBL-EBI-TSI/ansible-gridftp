@@ -29,9 +29,17 @@
 - name: Create /etc/gridftp.d
   file: path=/etc/gridftp.d state=directory owner=root group=root mode=0755
 
-- name: Create gridftp restrict directories
-  file: path={{item}} owner=root group=root mode=0755 state=directory
+- name: Check if gridftp restrict directories are nfs mounted
+  command: stat --file-system --format=%T {{item}}
+  changed_when: false
+  always_run: true
   with_items: '{{gridftp_restrict_directories}}'
+  register: mounts
+
+- name: Create gridftp restrict directories (unless they are nfs mounted)
+  file: path={{item.item}} owner=root group=root mode=0755 state=directory
+  with_items: '{{mounts.results}}'
+  when: item.stdout != 'nfs'
 
 - name: Enable service
   service: name=globus-gridftp-server state=started enabled=yes
