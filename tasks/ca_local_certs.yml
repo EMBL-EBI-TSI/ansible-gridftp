@@ -14,6 +14,7 @@
   shell: openssl x509 -hash -noout -in /etc/grid-security/certificates/{{item.name}}.pem
   register: hash
   changed_when: false
+  check_mode: no
 
 - name: Set link to {{item.name}} CA certificate
   file: path=/etc/grid-security/certificates/{{hash.stdout}}.0 src={{item.name}}.pem state=link

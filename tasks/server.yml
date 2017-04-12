@@ -21,6 +21,7 @@
 - name: Install host key
   copy: content='{{gridftp_host_key}}' dest=/etc/grid-security/hostkey.pem owner=root group=root mode=0400
   when: gridftp_host_key | default()
+  no_log: true
 
 - name: Configure server
   template: dest=/etc/gridftp.conf src=gridftp.conf.j2 owner=root group=root mode=0644
@@ -32,7 +33,8 @@
 - name: Check if gridftp restrict directories are nfs mounted
   command: stat --file-system --format=%T {{item}}
   changed_when: false
-  always_run: true
+  failed_when: false
+  check_mode: no
   with_items: '{{gridftp_restrict_directories}}'
   register: mounts
 
